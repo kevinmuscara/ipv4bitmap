@@ -61,3 +61,38 @@ for i in range(0, len(ip_addresses), chunk_size):
     if i + chunk_size < len(ip_addresses):
         await asyncio.sleep(delay_between_chunks)
 ```
+
+## TODO:
+* request level parallism
+
+## Benchmarks
+
+### 16 worker threads (625 addresses): 
+
+- 9.61 seconds
+- 125952 bytes (network) 0.13 MB
+- 33701888 bytes (memory) 33.7 MB
+
+### 32 worker threads (625 addresses):
+
+- 5.20 seconds
+- 121856 bytes (network) 0.12 MB
+- 25329664 bytes (memory) 25.33 MB
+
+### 300 batch every 5 seconds, no queue/threads (625 addresses):
+
+- 13.87 seconds
+- 136192 bytes (network) 0.14 MB
+- 69681152 bytes (memory) 69.68 MB
+
+### 16 worker threads (10,000 addresses): 
+
+- 156.98 seconds
+- 2307072 bytes (network) 2.31 MB
+- 88342528 bytes (memory) 88.34 MB
+
+### 32 worker threads (10,000 addresses):
+
+- 79.83 seconds
+- 2224128 bytes (network) 2.22 MB
+- memory unmeasurable
