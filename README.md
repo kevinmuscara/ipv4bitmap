@@ -47,3 +47,20 @@ Sample output:
 1.1.1.0,1
 1.1.1.1,1
 ```
+
+## Network Limitations
+Sending large amounts of ICMP echo requests requires sending a lot of data out, therefore we need to add a wait between a certain batch size. Use the `ping_with_delay.py` file to send large amounts of ICMP pings.
+
+Modify the `chunk_size` and `delay_between_chunks` variables to increase the amount of data sent. The larger the chunk size, the larger the delay should be.
+```python
+chunk_size = 300
+delay_between_chunks = 10
+
+for i in range(0, len(ip_addresses), chunk_size):
+    chunk = ip_addresses[i:i + chunk_size]
+    chunk_results = await asyncio.gather(*[check_ip(ip) for ip in chunk])
+    results.extend(chunk_results)
+
+    if i + chunk_size < len(ip_addresses):
+        await asyncio.sleep(delay_between_chunks)
+```
