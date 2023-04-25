@@ -1,6 +1,3 @@
-# internet
-Inspired by tom7
-
 ## Creating all possible IPs
 There are 2^32 possible IP addresses, or around 4.2 billion.
 
