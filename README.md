@@ -62,10 +62,29 @@ for i in range(0, len(ip_addresses), chunk_size):
         await asyncio.sleep(delay_between_chunks)
 ```
 
-## TODO:
-* request level parallism
+## Queue with Worker Threads
+For better performance, we can use worker threads. Use the `ping_worker.py` file to send large amounts of ICMP pings using thread workers.
 
-## Benchmarks
+Modify the `NUM_THREADS` variable to use more or less threads.
+```python
+NUM_THREADS = 128
+
+# Add tasks to the queue
+for i in range(0, len(ip_addresses), chunk_size):
+    chunk = ip_addresses[i:i + chunk_size]
+    for ip in chunk:
+        task_queue.put(ip)
+
+# Create a pool of worker threads
+threads = []
+for i in range(NUM_THREADS):
+    t = threading.Thread(target=worker)
+    t.start()
+    threads.append(t)
+```
+
+## Worker Thread Benchmarks
+Benchmarks for ICMP echos using thread system.
 
 ### 16 worker threads (625 addresses): 
 
@@ -78,12 +97,6 @@ for i in range(0, len(ip_addresses), chunk_size):
 - 5.20 seconds
 - 121856 bytes (network) 0.12 MB
 - 25329664 bytes (memory) 25.33 MB
-
-### 300 batch every 5 seconds, no queue/threads (625 addresses):
-
-- 13.87 seconds
-- 136192 bytes (network) 0.14 MB
-- 69681152 bytes (memory) 69.68 MB
 
 ### 16 worker threads (10,000 addresses): 
 
