@@ -21,7 +21,7 @@ async def check_ips(ip_list_file, output_file):
     print(f"Checking {len(ip_addresses)} IP addresses...")
 
     chunk_size = 300
-    delay_between_chunks = 10  # Adjust this value to set the wait time between chunks
+    delay_between_chunks = 5  # Adjust this value to set the wait time between chunks
 
     results = []
 
