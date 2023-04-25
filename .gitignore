@@ -128,6 +128,9 @@ ENV/
 env.bak/
 venv.bak/
 
+# macOS
+.DS_Store
+
 # IP project
 icmp_responses.txt
 ip_list.txt
