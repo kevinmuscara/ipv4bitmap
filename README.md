@@ -12,6 +12,8 @@ for a in range(<number>):
           for d in range(<number>):
 ```
 
+Ideally for each octect, your range will be the same number. This equates to number^4 IP addresses created. If your range is 10, the script will create the first 10,000 possible IP Addresses.
+
 This will output a list of IPs into `ip_list.txt`.
 
 **NOTE: I would not recommend going above 100 unless you have a lot of RAM.**
