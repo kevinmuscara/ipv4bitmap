@@ -3,7 +3,7 @@ import aioping
 
 async def check_ip(ip):
     try:
-        delay = await aioping.ping(ip, timeout=1)
+        delay = await aioping.ping(ip, timeout=0.25)
         print(f"{ip} is alive ({delay} ms)")
         return f"{ip},1"
     except TimeoutError:
