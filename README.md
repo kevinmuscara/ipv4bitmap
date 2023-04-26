@@ -1,19 +1,52 @@
-## Creating all possible IPs
-There are 2^32 possible IP addresses, or around 4.2 billion.
+# Pinging the internet
+Inspired by [Tom7's Harder Drive](http://tom7.org/harder/) project, this repo provides the utilities to ping every IP address in the IPv4 address space.
 
-In `generate_ip_list.py`, modify loop range to create more or less IPs:
-```python
-for a in range(<number>):
-  for b in range(<number>):
-      for c in range(<number>):
-          for d in range(<number>):
+## Create IP List
+There are 2^32 possible IP addresses, or around 4.2 billion addresses. The output list will be stored in `ip_list.txt`.
+
+### Exponential Range
+To skip addresses and create a list within a range of `range^4`, use the `generate_ip_list.py` script:
+
+```shell
+sudo python3 generate_ip_list.py <range>
 ```
 
-Ideally for each octect, your range will be the same number. This equates to number^4 IP addresses created. If your range is 10, the script will create the first 10,000 possible IP Addresses.
+Provide a 0-256 range value.
+**NOTE: This script requires elevated privilages to write to the output file**
 
-This will output a list of IPs into `ip_list.txt`.
+Example Usage:
+```shell
+sudo python3 generate_ip_list.py 1
+```
 
-**NOTE: I would not recommend going above 100 without reading the rest of this documentation.**
+Output:
+```
+0.0.0.0
+```
+
+### Ordered Range
+To create an IP list between a defined IP range, use the `generate_ip_range.py` script:
+
+```shell
+sudo python3 generate_ip_range.py <start_range> <end_range>
+```
+
+Provide a start and end range between `0.0.0.0` to `255.255.255.255`.
+
+Example Usage:
+```shell
+sudo python3 generate_ip_range.py 0.0.0.0 0.0.0.5
+```
+
+Output:
+```
+0.0.0.0
+0.0.0.1
+0.0.0.2
+0.0.0.3
+0.0.0.4
+0.0.0.5
+```
 
 ## Pinging IPs
 There are three scripts for pinging the IPs from the `ip_list.txt`. See below:
