@@ -2,6 +2,7 @@ import asyncio
 import aioping
 import psutil
 import time
+import argparse
 
 async def check_ip(ip):
     try:
@@ -14,14 +15,12 @@ async def check_ip(ip):
     except Exception as e:
         return f"Error checking {ip}: {e}"
 
-async def check_ips(ip_list_file, output_file):
+
+async def check_ips(ip_list_file, output_file, chunk_size, delay_between_chunks):
     with open(ip_list_file, 'r') as f:
         ip_addresses = f.read().splitlines()
 
     print(f"Checking {len(ip_addresses)} IP addresses...")
-
-    chunk_size = 300
-    delay_between_chunks = 5  # Adjust this value to set the wait time between chunks
 
     results = []
 
@@ -39,33 +38,48 @@ async def check_ips(ip_list_file, output_file):
 
     print(f"Finished. {len(results)} IP addresses checked.")
 
+
 def get_network_usage():
     net_io = psutil.net_io_counters()
     return net_io.bytes_sent, net_io.bytes_recv
+
 
 def get_memory_usage():
     memory = psutil.virtual_memory()
     return memory.used, memory.total
 
-try:
-    start_time = time.time()
-    start_sent, start_recv = get_network_usage()
-    start_used_mem, total_mem = get_memory_usage()
 
-    asyncio.run(check_ips("ip_list.txt", "icmp_responses.txt"))
+def parse_arguments():
+    parser = argparse.ArgumentParser(description='IP Address Checker')
+    parser.add_argument('--chunk', type=int, default=300, help='Number of IP addresses to process in each chunk')
+    parser.add_argument('--delay', type=int, default=5, help='Time delay between processing each chunk')
 
-    end_time = time.time()
-    end_sent, end_recv = get_network_usage()
-    end_used_mem, _ = get_memory_usage()
+    return parser.parse_args()
 
-    execution_time = end_time - start_time
-    sent_data = end_sent - start_sent
-    recv_data = end_recv - start_recv
-    used_mem_diff = end_used_mem - start_used_mem
 
-    print(f"Execution time: {execution_time:.2f} seconds")
-    print(f"Network usage: sent {sent_data} bytes, received {recv_data} bytes")
-    print(f"Memory usage: used {used_mem_diff} bytes out of {total_mem} bytes")
+if __name__ == '__main__':
+    try:
+        start_time = time.time()
+        start_sent, start_recv = get_network_usage()
+        start_used_mem, total_mem = get_memory_usage()
 
-except Exception as e:
-    print(f"Error: {e}")
+        args = parse_arguments()
+        asyncio.run(
+            check_ips("ip_list.txt", "icmp_responses.txt", args.chunk, args.delay)
+        )
+
+        end_time = time.time()
+        end_sent, end_recv = get_network_usage()
+        end_used_mem, _ = get_memory_usage()
+
+        execution_time = end_time - start_time
+        sent_data = end_sent - start_sent
+        recv_data = end_recv - start_recv
+        used_mem_diff = end_used_mem - start_used_mem
+
+        print(f"Execution time: {execution_time:.2f} seconds")
+        print(f"Network usage: sent {sent_data} bytes, received {recv_data} bytes")
+        print(f"Memory usage: used {used_mem_diff} bytes out of {total_mem} bytes")
+
+    except Exception as e:
+        print(f"Error: {e}")
