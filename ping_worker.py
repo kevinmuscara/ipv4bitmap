@@ -6,7 +6,7 @@ import queue
 import threading
 
 # Number of worker threads to use
-NUM_THREADS = 128
+NUM_THREADS = 64
 
 # Create a task queue
 task_queue = queue.Queue()
