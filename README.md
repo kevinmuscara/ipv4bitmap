@@ -83,52 +83,42 @@ sudo python3 ping_no_delay.py
 ```
 
 ### Chunk/Delay
-Use the chunk delay script for large amounts (>2000) of IPs. ICMP echo utilizes a lot of bandwidth, therefore we need to limit the requests sent out into chunks. run the `ping_delay.py` script:
+Use the chunk delay script for large amounts (>2000) of IPs. ICMP echo utilizes a lot of bandwidth, therefore we need to limit the requests sent out into chunks. run the `ping_delay.py` script.
+
+You can modify the `chunk size` and `delay between chunks` with command line arguments to increase the amount of data sent. The larger the chunk size, the larger the delay should be.
 
 ```shell
-sudo python3 ping_delay.py
+sudo python3 ping_delay.py --chunk <chunk_size> --delay <delay_between_chunk>
 ```
 
-You can modify the `chunk_size` and `delay_between_chunks` variables to increase the amount of data sent. The larger the chunk size, the larger the delay should be.
+Example:
 
-```python
-chunk_size = 300 # Amount sent in each batch
-delay_between_chunks = 10 # Seconds idle between each sent batch
-
-for i in range(0, len(ip_addresses), chunk_size):
-    chunk = ip_addresses[i:i + chunk_size]
-    chunk_results = await asyncio.gather(*[check_ip(ip) for ip in chunk])
-    results.extend(chunk_results)
-
-    if i + chunk_size < len(ip_addresses):
-        await asyncio.sleep(delay_between_chunks)
+```shell
+sudo python3 ping_delay.py --chunk 4 --delay 2
 ```
+
+This will ping 4 IP Addresses every 2 seconds.
+
+*Default: 300 chunk, 5 delay*
 
 ### Worker threads
-Use the worker thread script for extremely large amounts (>10000) of IPs. Use the [benchmarks](#benchmarks) below to get an idea of how many threads to use for your batch size. run the `ping_worker.py` script:
+Use the worker thread script for extremely large amounts (>10000) of IPs. Use the [benchmarks](#benchmarks) below to get an idea of how many threads to use for your batch size. run the `ping_worker.py` script.
+
+You can modify the `thread` number with command line arguments to use more or less threads.
 
 ```shell
-sudo python3 ping_worker.py
+sudo python3 ping_worker.py --thread <thread>
+``` 
+
+Example:
+
+```shell
+sudo python3 ping_worker.py --thread 128
 ```
 
-You can modify the `NUM_THREADS` variable to use more or less threads.
+This will use 128 worker threads.
 
-```python
-NUM_THREADS = 128
-
-# Add tasks to the queue
-for i in range(0, len(ip_addresses), chunk_size):
-    chunk = ip_addresses[i:i + chunk_size]
-    for ip in chunk:
-        task_queue.put(ip)
-
-# Create a pool of worker threads
-threads = []
-for i in range(NUM_THREADS):
-    t = threading.Thread(target=worker)
-    t.start()
-    threads.append(t)
-``` 
+*Default: 32 threads*
 
 ## Image Output
 To view the results as a bitmap image with black pixels representing dead hosts, and white pixels representing alive hosts, we can use the `create_map.py` script:
@@ -136,19 +126,19 @@ To view the results as a bitmap image with black pixels representing dead hosts,
 **NOTE: If you run this with elevated privilages, you will get permission issues viewing the image.**
 
 ```shell
-python3 create_map.py
+python3 bitmaps/create_map.py
 ```
 
 View the sample outputs below:
 
 ### 10,000 Addresses
-![10,000 Addresses](10k.png "10,000 Addresses")
+![10,000 Addresses](bitmaps/10k.png "10,000 Addresses")
 
 ### 50,000 Addresses
-![50,000 Addresses](50k.png "50,000 Addresses")
+![50,000 Addresses](bitmaps/50k.png "50,000 Addresses")
 
 ### 100,000 Addresses
-![100,000 Addresses](104k.png "100,000 Addresses")
+![100,000 Addresses](bitmaps/104k.png "100,000 Addresses")
 
 ## Benchmarks
 Benchmarks using [worker thread](#worker-threads) system.
