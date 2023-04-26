@@ -158,4 +158,6 @@ Worker Threads | Addresses | Time (seconds) | Network (bytes) | Network (MB) | M
 16             | 625       | 9.61           | 125952          | 0.13         | 33701888       | 33.7
 32             | 625       | 5.20           | 121856          | 0.12         | 25329664       | 25.33
 16             | 10,000    | 156.98         | 2307072         | 2.31         | 88342528       | 88.34
-32             | 10,000    | 79.83          | 2224128         | 2.22         | Unmeasured     | Unmeasured
+32             | 10,000    | 79.83          | 2224128         | 2.22         | 26001408       | 26.00
+
+![Benchmark](bench/Figure_1.png "Benchmark")
