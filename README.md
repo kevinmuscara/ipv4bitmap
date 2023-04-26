@@ -13,7 +13,7 @@ Ideally for each octect, your range will be the same number. This equates to num
 
 This will output a list of IPs into `ip_list.txt`.
 
-**NOTE: I would not recommend going above 100 unless you have a lot of RAM.**
+**NOTE: I would not recommend going above 100 without reading the rest of this documentation.**
 
 ## Pinging IPs
 There are three scripts for pinging the IPs from the `ip_list.txt`. See below:
@@ -113,6 +113,9 @@ View the sample outputs below:
 
 ### 50,000 Addresses
 ![50,000 Addresses](50k.png "50,000 Addresses")
+
+### 100,000 Addresses
+![100,000 Addresses](104k.png "100,000 Addresses")
 
 ## Benchmarks
 Benchmarks using [worker thread](#worker-threads) system.
