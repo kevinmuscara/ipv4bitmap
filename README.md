@@ -153,26 +153,9 @@ View the sample outputs below:
 ## Benchmarks
 Benchmarks using [worker thread](#worker-threads) system.
 
-### 16 worker threads (625 addresses): 
-
-- 9.61 seconds
-- 125952 bytes (network) 0.13 MB
-- 33701888 bytes (memory) 33.7 MB
-
-### 32 worker threads (625 addresses):
-
-- 5.20 seconds
-- 121856 bytes (network) 0.12 MB
-- 25329664 bytes (memory) 25.33 MB
-
-### 16 worker threads (10,000 addresses): 
-
-- 156.98 seconds
-- 2307072 bytes (network) 2.31 MB
-- 88342528 bytes (memory) 88.34 MB
-
-### 32 worker threads (10,000 addresses):
-
-- 79.83 seconds
-- 2224128 bytes (network) 2.22 MB
-- memory unmeasured
+Worker Threads | Addresses | Time (seconds) | Network (bytes) | Network (MB) | Memory (bytes) | Memory (MB)
+---------------|-----------|----------------|-----------------|--------------|----------------|------------
+16             | 625       | 9.61           | 125952          | 0.13         | 33701888       | 33.7
+32             | 625       | 5.20           | 121856          | 0.12         | 25329664       | 25.33
+16             | 10,000    | 156.98         | 2307072         | 2.31         | 88342528       | 88.34
+32             | 10,000    | 79.83          | 2224128         | 2.22         | Unmeasured     | Unmeasured
