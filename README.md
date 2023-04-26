@@ -140,6 +140,9 @@ View the sample outputs below:
 ### 100,000 Addresses
 ![100,000 Addresses](bitmaps/104k.png "100,000 Addresses")
 
+### NKU Mapping
+![NKU Mapping](bitmaps/NKU.png "NKU Mapping")
+
 ## Benchmarks
 Benchmarks using [worker thread](#worker-threads) system.
 

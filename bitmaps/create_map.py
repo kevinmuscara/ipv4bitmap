@@ -1,4 +1,5 @@
 from PIL import Image
+import math
 
 ip_addresses = []
 statuses = []
@@ -14,7 +15,7 @@ with open('icmp_responses.txt', 'r') as file:
 
 # Determine the size of the image
 num_pixels = len(ip_addresses)
-image_width = int(num_pixels ** 0.5)  # Square image
+image_width = math.ceil(num_pixels ** 0.5)  # Adjusted width calculation
 
 # Create a new blank image
 image = Image.new('L', (image_width, image_width))
