@@ -200,4 +200,4 @@ Worker Threads | Addresses | Time (seconds) | Network (bytes) | Network (MB) | M
 256            | 10,000    | 50.62          | 2228224         | 2.22         | 31391744       | 31.39
 512            | 10,000    | 62.11          | 1292288         | 1.29         | 142639104      | 142.63
 
-![Benchmark](bench/Figure_1.png "Benchmark")
+![Benchmark](bench/Figure_2.png "Benchmark")
