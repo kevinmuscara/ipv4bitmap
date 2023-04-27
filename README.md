@@ -23,7 +23,7 @@ Inspired by [Tom7's Harder Drive](http://tom7.org/harder/) project, this repo pr
 * [Benchmarks](#benchmarks)
 
 ## TODO
-- [ ] Create an algorithm to determine optimal number of threads for given addresses
+- [ ] #1
 - [ ] Modify Docker implementation
   - [ ] Setup a RabbitMQ Server
     - [ ] Configure an optimal queueing system for pinging process
