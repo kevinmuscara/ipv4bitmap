@@ -143,6 +143,9 @@ View the sample outputs below:
 ### NKU Mapping
 ![NKU Mapping](bitmaps/NKU.png "NKU Mapping")
 
+### Public Range
+![Public Range](bitmaps/public_range.png "Public Range")
+
 ## Benchmarks
 Benchmarks using [worker thread](#worker-threads) system.
 
