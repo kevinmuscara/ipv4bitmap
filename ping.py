@@ -1,22 +1,25 @@
-import asyncio
-import aioping
+import argparse
 import psutil
 import time
-import argparse
+import subprocess
+from concurrent.futures import ThreadPoolExecutor
 
-async def check_ip(ip):
+def check_ip(ip):
     try:
-        delay = await aioping.ping(ip, timeout=0.25)
-        print(f"{ip} is alive ({delay} ms)")
-        return f"{ip},1"
-    except TimeoutError:
-        print(f"{ip} is dead")
-        return f"{ip},0"
+        ping_command = ["ping", "-c", "1", "-W", "1.5", ip]
+        ping_process = subprocess.Popen(ping_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        _, error = ping_process.communicate()
+
+        if ping_process.returncode == 0:
+            print(f"{ip} is alive")
+            return f"{ip},1"
+        else:
+            print(f"{ip} is dead")
+            return f"{ip},0"
     except Exception as e:
         return f"Error checking {ip}: {e}"
 
-
-async def check_ips(ip_list_file, output_file, chunk_size, delay_between_chunks):
+def check_ips(ip_list_file, output_file):
     with open(ip_list_file, 'r') as f:
         ip_addresses = f.read().splitlines()
 
@@ -24,13 +27,12 @@ async def check_ips(ip_list_file, output_file, chunk_size, delay_between_chunks)
 
     results = []
 
-    for i in range(0, len(ip_addresses), chunk_size):
-        chunk = ip_addresses[i:i + chunk_size]
-        chunk_results = await asyncio.gather(*[check_ip(ip) for ip in chunk])
-        results.extend(chunk_results)
+    with ThreadPoolExecutor() as executor:
+        ping_futures = [executor.submit(check_ip, ip) for ip in ip_addresses]
 
-        if i + chunk_size < len(ip_addresses):
-            await asyncio.sleep(delay_between_chunks)
+        for future in ping_futures:
+            result = future.result()
+            results.append(result)
 
     with open(output_file, 'w') as f:
         for result in results:
@@ -38,35 +40,24 @@ async def check_ips(ip_list_file, output_file, chunk_size, delay_between_chunks)
 
     print(f"Finished. {len(results)} IP addresses checked.")
 
-
 def get_network_usage():
     net_io = psutil.net_io_counters()
     return net_io.bytes_sent, net_io.bytes_recv
-
 
 def get_memory_usage():
     memory = psutil.virtual_memory()
     return memory.used, memory.total
 
-
-def parse_arguments():
-    parser = argparse.ArgumentParser(description='IP Address Checker')
-    parser.add_argument('--chunk', type=int, default=300, help='Number of IP addresses to process in each chunk')
-    parser.add_argument('--delay', type=int, default=5, help='Time delay between processing each chunk')
-
-    return parser.parse_args()
-
-
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Ping a list of IP addresses.')
+    args = parser.parse_args()
+
     try:
         start_time = time.time()
         start_sent, start_recv = get_network_usage()
         start_used_mem, total_mem = get_memory_usage()
 
-        args = parse_arguments()
-        asyncio.run(
-            check_ips("ip_list.txt", "icmp_responses.txt", args.chunk, args.delay)
-        )
+        check_ips("ip_list.txt", "icmp_responses.txt")
 
         end_time = time.time()
         end_sent, end_recv = get_network_usage()
