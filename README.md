@@ -11,12 +11,11 @@ Inspired by [Tom7's Harder Drive](http://tom7.org/harder/) project, this repo pr
   * [Creating image](#creating-image)
   * [Running image](#running-image)
 * [Image Output](#image-output)
-  * [10,000 Addresses](#10000-addresses)
-  * [50,000 Addresses](#50000-addresses)
-  * [100,000 Addresses](#100000-addresses)
-  * [NKU Mapping](#nku-mapping)
-  * [Public Range](#public-range)
+  * [Active Spaces](#active-spaces)
+  * [Dead Spaces](#dead-spaces)
 * [Benchmarks](#benchmarks)
+  * [Active Spaces Bench](#active-space-benchmarks)
+  * [Dead Spaces Bench](#dead-space-benchmarks)
 
 ## TODO
 - [ ] [Algorithm to determine optimal number of threads.](https://github.com/kevinmuscara/internet/issues/1)
