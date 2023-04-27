@@ -120,6 +120,19 @@ This will use 128 worker threads.
 
 *Default: 32 threads*
 
+## Combined Generation and Pinging
+To combine the IP generation and pinging process, use the `full_test.py` script. See the example usage below:
+
+Usage:
+```shell
+sudo python3 full_test.py <range_start> <range_end> --threads <thread_count>
+```
+
+Example:
+```shell
+sudo python3 full_test.py 0.0.0.0 0.0.0.10 --threads 128
+```
+
 ## Image Output
 To view the results as a bitmap image with black pixels representing dead hosts, and white pixels representing alive hosts, we can use the `create_map.py` script:
 
