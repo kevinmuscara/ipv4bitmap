@@ -23,7 +23,13 @@ image = Image.new('L', (image_width, image_width))
 # Set the pixels based on the statuses
 pixels = []
 for status in statuses:
-    pixel_value = 0 if status == 0 else 255
+    if status == 0:
+        pixel_value = 0
+    elif status == 1:
+        pixel_value = 255
+    else:
+        pixel_value = (255,0,0)
+    
     pixels.append(pixel_value)
 
 # Assign the pixel values to the image
