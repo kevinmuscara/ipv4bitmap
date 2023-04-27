@@ -133,6 +133,29 @@ Example:
 sudo python3 full_test.py 0.0.0.0 0.0.0.10 --threads 128
 ```
 
+## Docker
+To run the process in docker, check out the contents of the [docker](/docker) directory.
+
+### Creating image
+To create the image, first modify the [dockerfile](/docker/Dockerfile) `CMD` argument to match your preferences.
+
+```dockerfile
+CMD ["python", "ping.py", "<start_range>", "<end_range>", "--threads", "<thread_count>"]
+```
+
+Next, build the image by running:
+
+```shell
+docker build -t pingy .
+```
+
+### Running image
+To run the image after building it, run the following command:
+
+```shell
+docker run -d pingy
+```
+
 ## Image Output
 To view the results as a bitmap image with black pixels representing dead hosts, and white pixels representing alive hosts, we can use the `create_map.py` script:
 
