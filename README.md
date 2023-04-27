@@ -23,7 +23,7 @@ Inspired by [Tom7's Harder Drive](http://tom7.org/harder/) project, this repo pr
 * [Benchmarks](#benchmarks)
 
 ## TODO
-- [ ] https://github.com/kevinmuscara/internet/issues/1
+- [ ] [Algorithm to determine optimal number of threads.](https://github.com/kevinmuscara/internet/issues/1)
 - [ ] Modify Docker implementation
   - [ ] Setup a RabbitMQ Server
     - [ ] Configure an optimal queueing system for pinging process
