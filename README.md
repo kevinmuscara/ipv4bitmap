@@ -1,6 +1,37 @@
 # Pinging the internet
 Inspired by [Tom7's Harder Drive](http://tom7.org/harder/) project, this repo provides the utilities to ping every IP address in the IPv4 address space.
 
+## Table of Contents
+* [TODO](#todo)
+* [Create IP List](#create-ip-list)
+  * [Exponential Range](#exponential-range)
+  * [Ordered Range](#ordered-range)
+* [Pinging IPs](#pinging-ips)
+  * [No Delay](#no-delay)
+  * [Chunk/Delay](#chunkdelay)
+  * [Worker Threads](#worker-threads)
+* [Combined Generation and Pinging](#combined-generation-and-pinging)
+* [Docker](#docker)
+  * [Creating image](#creating-image)
+  * [Running image](#running-image)
+* [Image Output](#image-output)
+  * [10,000 Addresses](#10000-addresses)
+  * [50,000 Addresses](#50000-addresses)
+  * [100,000 Addresses](#100000-addresses)
+  * [NKU Mapping](#nku-mapping)
+  * [Public Range](#public-range)
+* [Benchmarks](#benchmarks)
+
+## TODO
+- [ ] Create an algorithm to determine optimal number of threads for given addresses
+- [ ] Modify Docker implementation
+  - [ ] Setup a RabbitMQ Server
+    - [ ] Configure an optimal queueing system for pinging process
+  - [ ] Configure container networking
+    - [ ] Each container working with the queue needs to have its own IP address to bypass network limitations
+- [ ] Live Benchmarks?
+- [ ] Network and Memory performance accuracy?
+
 ## Create IP List
 There are 2^32 possible IP addresses, or around 4.2 billion addresses. The output list will be stored in `ip_list.txt`.
 
