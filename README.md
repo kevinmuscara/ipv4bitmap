@@ -26,10 +26,10 @@ Inspired by [Tom7's Harder Drive](http://tom7.org/harder/) project, this repo pr
 There are 2^32 possible IP addresses, or around 4.2 billion addresses. The output list will be stored in `ip_list.txt`.
 
 ### Exponential Range
-To skip addresses and create a list within a range of `range^4`, use the `generate_ip_list.py` script:
+To skip addresses and create a list within a range of `range^4`, use the `list.py` script:
 
 ```shell
-sudo python3 generate_ip_list.py <range>
+sudo python3 list.py <range>
 ```
 
 Provide a 0-256 range value.
@@ -37,7 +37,7 @@ Provide a 0-256 range value.
 
 Example Usage:
 ```shell
-sudo python3 generate_ip_list.py 1
+sudo python3 list.py 1
 ```
 
 Output:
@@ -46,17 +46,17 @@ Output:
 ```
 
 ### Ordered Range
-To create an IP list between a defined IP range, use the `generate_ip_range.py` script:
+To create an IP list between a defined IP range, use the `range.py` script:
 
 ```shell
-sudo python3 generate_ip_range.py <start_range> <end_range>
+sudo python3 range.py <start_range> <end_range>
 ```
 
 Provide a start and end range between `0.0.0.0` to `255.255.255.255`.
 
 Example Usage:
 ```shell
-sudo python3 generate_ip_range.py 0.0.0.0 0.0.0.5
+sudo python3 range.py 0.0.0.0 0.0.0.5
 ```
 
 Output:
@@ -118,12 +118,12 @@ docker run -d pingy
 ```
 
 ## Image Output
-To view the results as a bitmap image with black pixels representing dead hosts, and white pixels representing alive hosts, use the `create_map.py` script:
+To view the results as a bitmap image with black pixels representing dead hosts, and white pixels representing alive hosts, use the `map.py` script:
 
 **NOTE: If you run this with elevated privilages, you will get permission issues viewing the image.**
 
 ```shell
-python3 bitmaps/create_map.py
+python3 bitmaps/map.py
 ```
 
 View the sample outputs below:
