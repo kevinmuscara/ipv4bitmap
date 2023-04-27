@@ -24,13 +24,9 @@ Inspired by [Tom7's Harder Drive](http://tom7.org/harder/) project, this repo pr
 
 ## TODO
 - [ ] [Algorithm to determine optimal number of threads.](https://github.com/kevinmuscara/internet/issues/1)
-- [ ] Modify Docker implementation
-  - [ ] Setup a RabbitMQ Server
-    - [ ] Configure an optimal queueing system for pinging process
-  - [ ] Configure container networking
-    - [ ] Each container working with the queue needs to have its own IP address to bypass network limitations
-- [ ] Live Benchmarks?
-- [ ] Network and Memory performance accuracy?
+- [ ] [Modify Docker implementation.](https://github.com/kevinmuscara/internet/issues/2)
+- [ ] [Live Benchmarks.](https://github.com/kevinmuscara/internet/issues/3)
+- [ ] [Network and Memory performance accuracy.](https://github.com/kevinmuscara/internet/issues/4)
 
 ## Create IP List
 There are 2^32 possible IP addresses, or around 4.2 billion addresses. The output list will be stored in `ip_list.txt`.
