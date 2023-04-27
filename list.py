@@ -1,7 +1,7 @@
 import sys
 
 if len(sys.argv) != 2:
-    print("Usage: sudo python3 generate_ip_list.py <range>")
+    print("Usage: sudo python3 list.py <range>")
     print("Please provide a single integer range.")
     sys.exit(1)
 
