@@ -18,7 +18,7 @@ Inspired by [Tom7's Harder Drive](http://tom7.org/harder/) project, this repo pr
   * [Dead Spaces Bench](#dead-space-benchmarks)
 
 ## TODO
-- [ ] [Modify Docker implementation.](https://github.com/kevinmuscara/internet/issues/2)
+- [x] [Modify Docker implementation.](https://github.com/kevinmuscara/internet/issues/2)
 - [ ] [Live Benchmarks.](https://github.com/kevinmuscara/internet/issues/3)
 - [ ] [Network and Memory performance accuracy.](https://github.com/kevinmuscara/internet/issues/4)
 

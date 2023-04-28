@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# rabbitmq
+queue/*.txt
+*.txt
+
 # C extensions
 *.so
 
@@ -130,10 +134,6 @@ venv.bak/
 
 # macOS
 .DS_Store
-
-# IP project
-icmp_responses.txt
-ip_list.txt
 
 # Spyder project settings
 .spyderproject
